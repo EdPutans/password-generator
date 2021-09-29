@@ -1,0 +1,12 @@
+{
+  "name": "password-generator",
+  "scripts": {
+    "test" : "tsc && node ./dist/index.js"
+  },
+  "version": "1.0.0",
+  "description": "Generates passwords 4u",
+  "main": "src/index.ts",
+  "author": "Ed Putans",
+  "license": "MIT",
+  "private": false
+}
