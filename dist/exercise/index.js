@@ -9,26 +9,27 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 exports.__esModule = true;
-var character_sets_1 = require("./character-sets");
-// password setup
-var mustHaveUpperCaseLetters = false;
+var character_sets_js_1 = require("./character-sets.js");
+// password configuration
+var mustHaveUpperCaseLetters = true;
 var mustHaveLowerCaseLetters = false;
 var mustHaveNumbers = false;
 var mustHaveSpecialCharacters = false;
 var passwordLength = 20;
+// get all characters that are allowed according to our setup
 function getAllowedCharacters() {
     var allowedCharacters = [];
     if (mustHaveLowerCaseLetters)
-        allowedCharacters.push.apply(allowedCharacters, character_sets_1.lowerCaseLetters);
+        allowedCharacters.push.apply(allowedCharacters, character_sets_js_1.lowerCaseLetters);
     if (mustHaveUpperCaseLetters)
-        allowedCharacters.push.apply(allowedCharacters, character_sets_1.upperCaseLetters);
+        allowedCharacters.push.apply(allowedCharacters, character_sets_js_1.upperCaseLetters);
     if (mustHaveSpecialCharacters)
-        allowedCharacters.push.apply(allowedCharacters, character_sets_1.specialChars);
+        allowedCharacters.push.apply(allowedCharacters, character_sets_js_1.specialChars);
     if (mustHaveNumbers)
-        allowedCharacters.push.apply(allowedCharacters, character_sets_1.numbers);
+        allowedCharacters.push.apply(allowedCharacters, character_sets_js_1.numbers);
     return allowedCharacters;
 }
-var allowedCharacters = getAllowedCharacters();
+// given an array, return a random item from it   
 function getRandomItemFromArray(array) {
     var randomIndex = Math.floor(Math.random() * array.length);
     return array[randomIndex];
@@ -37,19 +38,19 @@ function getRandomItemFromArray(array) {
 function getMandatoryCharacters() {
     var result = [];
     if (mustHaveLowerCaseLetters) {
-        var character = getRandomItemFromArray(character_sets_1.lowerCaseLetters);
+        var character = getRandomItemFromArray(character_sets_js_1.lowerCaseLetters);
         result.push(character);
     }
     if (mustHaveUpperCaseLetters) {
-        var character = getRandomItemFromArray(character_sets_1.upperCaseLetters);
+        var character = getRandomItemFromArray(character_sets_js_1.upperCaseLetters);
         result.push(character);
     }
     if (mustHaveSpecialCharacters) {
-        var character = getRandomItemFromArray(character_sets_1.specialChars);
+        var character = getRandomItemFromArray(character_sets_js_1.specialChars);
         result.push(character);
     }
     if (mustHaveNumbers) {
-        var number = getRandomItemFromArray(character_sets_1.numbers);
+        var number = getRandomItemFromArray(character_sets_js_1.numbers);
         result.push(number);
     }
     return result;
@@ -57,6 +58,7 @@ function getMandatoryCharacters() {
 // fill the rest of the password with whatever is allowed
 function getRandomCharacters(numberOfCharacters) {
     var randomCharacters = [];
+    var allowedCharacters = getAllowedCharacters();
     for (var i = 1; i <= numberOfCharacters; i++) {
         var randomChar = getRandomItemFromArray(allowedCharacters);
         randomCharacters.push(randomChar);
@@ -67,6 +69,7 @@ function getRandomCharacters(numberOfCharacters) {
 function shuffleArray(array) {
     return array.sort(function () { return 0.5 - Math.random(); });
 }
+// generate the final result
 function generatePassword() {
     var requiredCharacters = getMandatoryCharacters();
     var remainingCharacters = getRandomCharacters(passwordLength - requiredCharacters.length);
@@ -80,4 +83,5 @@ function generatePassword() {
         console.log(password);
     }
 }
+// init, essentially.
 generatePassword();

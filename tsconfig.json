@@ -2,7 +2,8 @@
     "compilerOptions": {
         "strict": true,
         "outDir": "./dist",
-        "lib": ["dom", "ES2020", "ES2016"]
+        "lib": ["dom", "ES2020", "ES2016"],
+        "allowJs": true,
     },
     "include": ["src/**/*"]
 }

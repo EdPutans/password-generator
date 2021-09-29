@@ -5,15 +5,17 @@ import {
     numbers,
   } from "./character-sets";
   
-  // password setup
+  // password configuration
   const mustHaveUpperCaseLetters: boolean = false;
   const mustHaveLowerCaseLetters: boolean = false;
   const mustHaveNumbers: boolean = false;
   const mustHaveSpecialCharacters: boolean = false;
   const passwordLength: number = 20;
   
+  // solution to challenge:
   type StringOrNumber = string | number;
   
+  // get all characters that are allowed according to our setup
   function getAllowedCharacters(): StringOrNumber[] {
     const allowedCharacters: StringOrNumber[] = [];
   
@@ -25,10 +27,10 @@ import {
     return allowedCharacters;
   }
   
-  const allowedCharacters = getAllowedCharacters();
-  
+  // given an array, return a random item from it   
   function getRandomItemFromArray(array: any[]): any {
     const randomIndex: number = Math.floor(Math.random() * array.length);
+    
     return array[randomIndex];
   }
   
@@ -59,6 +61,7 @@ import {
   // fill the rest of the password with whatever is allowed
   function getRandomCharacters(numberOfCharacters: number): StringOrNumber[] {
     const randomCharacters: StringOrNumber[] = [];
+    const allowedCharacters = getAllowedCharacters();
   
     for (let i = 1; i <= numberOfCharacters; i++) {
       const randomChar: StringOrNumber = getRandomItemFromArray(allowedCharacters);
@@ -72,6 +75,7 @@ import {
     return array.sort(() => 0.5 - Math.random());
   }
   
+  // generate the final result
   function generatePassword(): void {
     const requiredCharacters: StringOrNumber[] = getMandatoryCharacters();
     const remainingCharacters: StringOrNumber[] = getRandomCharacters(
@@ -92,5 +96,6 @@ import {
     }
   }
   
+  // init, essentially.
   generatePassword();
   
